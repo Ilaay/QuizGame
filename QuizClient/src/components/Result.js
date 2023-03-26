@@ -17,9 +17,7 @@ export default function Result() {
         createAPIEndpoint(ENDPOINTS.participant)
         .fetchById(context.participantId)
         .then((res) => {
-            console.log(res.data.name);
             setParticipantName(res.data.name);
-            console.log(participantName);
         });
 
         createAPIEndpoint(ENDPOINTS.getAnswers)
@@ -56,7 +54,7 @@ export default function Result() {
                 score: score,
             })
             .then(res => {
-                alert("Your result successfully submited!")
+                alert("Your result successfully submited!");
             })
             .catch(err => { console.log(err) })
     }
