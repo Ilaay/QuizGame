@@ -1,4 +1,4 @@
-import { Alert, Button, Card, CardContent, CardMedia, Container, Typography } from '@mui/material';
+import { Button, Card, CardContent, Container, Typography } from '@mui/material';
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
@@ -15,10 +15,10 @@ export default function Result() {
     useEffect(() => {
 
         createAPIEndpoint(ENDPOINTS.participant)
-        .fetchById(context.participantId)
-        .then((res) => {
-            setParticipantName(res.data.name);
-        });
+            .fetchById(context.participantId)
+            .then((res) => {
+                setParticipantName(res.data.name);
+            });
 
         createAPIEndpoint(ENDPOINTS.getAnswers)
             .post()
@@ -28,7 +28,7 @@ export default function Result() {
             .catch(err => console.log(err))
     }, [])
 
-    const calculateScore = questionAnswers => {
+    const calculateScore = (questionAnswers) => {
         let tempScore = 0;
 
         for (let i = 0; i < 4; i++) {
@@ -53,55 +53,52 @@ export default function Result() {
                 participantId: context.participantId,
                 score: score,
             })
-            .then(res => {
+            .then(() => {
                 alert("Your result successfully submited!");
             })
             .catch(err => { console.log(err) })
     }
 
     return (
-        <>
-            <Card sx={{ mt: 5, display: 'flex', width: '100%', maxWidth: 640, mx: 'auto' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <CardContent sx={{ flex: '1 0 auto', textAlign: 'center' }}>
-                        <Typography variant="h4">Congratulations, {participantName}!</Typography>
-                        <Container>
-                            <div>
-                                &nbsp;
-                            </div>
-                        </Container>
-                        <Typography variant="h6">
-                            YOUR SCORE
-                        </Typography>
-                        <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                            <Typography variant="span" color={green[500]}>
-                                {score}
-                            </Typography>/4
-                        </Typography>
+        <Card sx={{ mt: 5, display: 'flex', width: '100%', maxWidth: 640, mx: 'auto' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <CardContent sx={{ flex: '1 0 auto', textAlign: 'center' }}>
+                    <Typography variant="h4">Congratulations, {participantName}!</Typography>
+                    <Container>
+                        <div>
+                            &nbsp;
+                        </div>
+                    </Container>
+                    <Typography variant="h6">
+                        YOUR SCORE
+                    </Typography>
+                    <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                        <Typography variant="span" color={green[500]}>
+                            {score}
+                        </Typography>/4
+                    </Typography>
 
-                        <Container>
-                            <div>
-                                &nbsp;
-                                &nbsp;
-                            </div>
-                        </Container>
+                    <Container>
+                        <div>
+                            &nbsp;
+                            &nbsp;
+                        </div>
+                    </Container>
 
-                        <Button variant="contained"
-                            sx={{ mx: 2 }}
-                            size="big"
-                            onClick={submitScore}>
-                            Submit
-                        </Button>
-                        <Button variant="contained"
-                            sx={{ mx: 2 }}
-                            size="big"
-                            onClick={restart}>
-                            Re-try
-                        </Button>
-                    </CardContent>
-                </Box>
-            </Card>
-
-        </>
+                    <Button variant="contained"
+                        sx={{ mx: 2 }}
+                        size="big"
+                        onClick={submitScore}>
+                        Submit
+                    </Button>
+                    <Button variant="contained"
+                        sx={{ mx: 2 }}
+                        size="big"
+                        onClick={restart}>
+                        Re-try
+                    </Button>
+                </CardContent>
+            </Box>
+        </Card>
     )
 }

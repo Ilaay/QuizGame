@@ -3,10 +3,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createAPIEndpoint, ENDPOINTS } from "../api";
-import { getFormatedTime } from "../helper";
 import useStateContext from "../hooks/useStateContext";
-
-let timer;
 
 export default function Quiz() {
 
@@ -22,8 +19,6 @@ export default function Quiz() {
                 setQuestions(res.data)
             })
             .catch(err => { console.log(err); })
-
-        return () => { clearInterval(timer) }
     }, [])
 
     const updateAnswer = (qnId, optionIdx) => {
